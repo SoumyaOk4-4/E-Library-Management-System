@@ -8,6 +8,12 @@ public class ElibController {
 
     @GetMapping("/")
     public String Index() {
-        return "index";   // This loads index.jsp
+        return "index";
     }
+
+    @GetMapping("/dash")
+    public String dashboard() {
+        return "dashboard";
+    }
+    
 }

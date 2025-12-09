@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #2e2e2e;
+  color: white;
+}
+
+header {
+  font-size: 22px;
+  font-weight: 500;
+  padding: 20px;
+  margin-top: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-bar {
+    width: 30%;
+}
+
+.search-bar input {
+    font-size: 15px;
+    width: 100%;
+    padding: 13px;
+    border-radius: 7px;
+    border: none;
+    outline: none;
+}
+
+.logo-dash-cluster,.notif-profile-cluster {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+}
+
+.notif-profile-cluster .profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.notif-profile-cluster .profile .profile-name{
+    font-size: 18px;
+}
+
+.middle {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.middle .sidebar {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+
+    margin-top: 20px;
+    font-size: 17px;
+    padding: 20px;
+    height: max(650px, 1vw);
+    width: 18%;
+    gap: 40px;
+}
+
+.middle .sidebar .api-call-btn {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.middle .sidebar .api-call-btn:hover {
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: #1c1c1c;
+}
+
+.middle .view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #1c1c1c;
+    height: max(650px, 1vw);
+    margin: 0 30px;
+    width: 100%;
+    border-radius: 20px;
+}

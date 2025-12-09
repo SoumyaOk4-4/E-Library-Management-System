@@ -1,22 +1,29 @@
 package com.devs.elib.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String name;
+    @Column(unique = true, nullable = false)
     private String email;
+    private long phno;
+    private String password;
+    private String role;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -32,5 +39,26 @@ public class User {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public long getPhno() {
+        return phno;
+    }
+    public void setPhno(long phno) {
+        this.phno = phno;
+    }
+
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

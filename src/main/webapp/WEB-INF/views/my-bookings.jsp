@@ -47,26 +47,6 @@
             margin: 10px 0;
             color: #333;
         }
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #eee;
-        }
-        .tab-btn {
-            padding: 12px 20px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            color: #666;
-            border-bottom: 3px solid transparent;
-        }
-        .tab-btn.active {
-            color: #667eea;
-            border-bottom-color: #667eea;
-        }
         .bookings-table {
             background: white;
             border-radius: 8px;
@@ -111,6 +91,7 @@
         .overdue {
             background-color: #ffebee;
             color: #c62828;
+            font-weight: bold;
         }
         .return-btn {
             padding: 8px 16px;
@@ -137,6 +118,10 @@
         }
         .fine-amount {
             color: #f44336;
+            font-weight: 600;
+        }
+        .no-fine {
+            color: #4CAF50;
             font-weight: 600;
         }
     </style>
@@ -177,7 +162,7 @@
                                 <th>Borrow Date</th>
                                 <th>Due Date</th>
                                 <th>Status</th>
-                                <th>Fine</th>
+                                <th>Fine (Real-time)</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -209,11 +194,39 @@
                                     </td>
                                     <td>
                                         <c:choose>
-                                            <c:when test="${borrowing.fine > 0}">
-                                                <span class="fine-amount">Rs. ${borrowing.calculateFine()}</span>
+                                            <c:when test="${borrowing.status == 'BORROWED'}">
+                                                <!-- Real-time fine calculation using JavaScript -->
+                                                <span id="fine-${borrowing.id}" class="fine-display">
+                                                    Rs. <span id="fine-amount-${borrowing.id}">0</span>
+                                                </span>
+                                                <script>
+                                                    function calculateFine(borrowDateStr, dueDateStr) {
+                                                        const today = new Date();
+                                                        const dueDate = new Date(dueDateStr);
+                                                        if (today <= dueDate) {
+                                                            return 0;
+                                                        }
+                                                        const timeDiff = today - dueDate;
+                                                        const daysOverdue = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                                                        return daysOverdue * 10; // Rs. 10 per day
+                                                    }
+
+                                                    const borrowDateStr = '${borrowing.borrowDate}';
+                                                    const dueDateStr = '${borrowing.dueDate}';
+                                                    const fineAmount = calculateFine(borrowDateStr, dueDateStr);
+                                                    document.getElementById('fine-amount-${borrowing.id}').innerText = fineAmount;
+                                                </script>
                                             </c:when>
                                             <c:otherwise>
-                                                Rs. 0
+                                                <!-- Already returned, show stored fine -->
+                                                <c:choose>
+                                                    <c:when test="${borrowing.fine > 0}">
+                                                        <span class="fine-amount">Rs. ${borrowing.fine}</span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <span class="no-fine">Rs. 0</span>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </c:otherwise>
                                         </c:choose>
                                     </td>

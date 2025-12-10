@@ -36,7 +36,8 @@ public class BorrowingController {
             if (borrowing != null) {
                 return "redirect:/borrowing/mybookings?success=Book borrowed successfully!";
             } else {
-                return "redirect:/books?error=Book not available!";
+                // Book not available or already borrowed
+                return "redirect:/books/" + bookId + "?error=You already have this book borrowed or it's not available!";
             }
         }
         return "redirect:/login";

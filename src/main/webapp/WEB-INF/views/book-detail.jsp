@@ -137,6 +137,18 @@
         .btn-back:hover {
             background-color: #616161;
         }
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+            border-left: 4px solid #c62828;
+        }
+        .error-message.show {
+            display: block;
+        }
     </style>
 </head>
 
@@ -152,6 +164,12 @@
     </header>
 
     <div class="book-detail-container">
+        <!-- Error Message Display -->
+        <div class="error-message" id="errorMessage">
+            <i class="fa-solid fa-exclamation-circle"></i>
+            <strong>Cannot Borrow!</strong> You already have this book borrowed. Please return it first.
+        </div>
+
         <div class="book-header">
             <div class="book-cover">
                 <c:choose>
@@ -206,14 +224,14 @@
             <%
                 String userEmail = (String) session.getAttribute("udata");
                 String role = (String) session.getAttribute("role");
-                Boolean available = (Boolean) pageContext.getRequest().getAttribute("available");
+                String error = request.getParameter("error");
             %>
             
             <!-- Borrow Button - Only for logged-in non-admin users -->
             <% if (userEmail != null && !"admin".equals(role)) { %>
-                <a href="${pageContext.request.contextPath}/borrowing/borrow/${book.id}" class="btn btn-borrow">
+                <button onclick="borrowBook('${book.id}')" class="btn btn-borrow">
                     <i class="fa-solid fa-download"></i> Borrow Book
-                </a>
+                </button>
             <% } %>
             
             <!-- Edit and Delete Buttons - Only for admin users -->
@@ -232,6 +250,37 @@
             </a>
         </div>
     </div>
+
+    <script>
+        // Check if there's an error message in URL
+        function checkError() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const error = urlParams.get('error');
+            
+            if (error) {
+                const errorMessage = document.getElementById('errorMessage');
+                errorMessage.classList.add('show');
+                
+                // Auto-hide error message after 5 seconds
+                setTimeout(() => {
+                    errorMessage.classList.remove('show');
+                }, 5000);
+            }
+        }
+
+        // Borrow book with confirmation
+        function borrowBook(bookId) {
+            const confirmBorrow = confirm('Are you sure you want to borrow this book?\n\nDue Date: 7 days from today');
+            
+            if (confirmBorrow) {
+                // Redirect to borrow endpoint
+                window.location.href = '${pageContext.request.contextPath}/borrowing/borrow/' + bookId;
+            }
+        }
+
+        // Run error check when page loads
+        window.addEventListener('load', checkError);
+    </script>
 </body>
 
 </html>

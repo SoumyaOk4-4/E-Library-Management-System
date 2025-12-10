@@ -126,7 +126,7 @@
 
             <div class="form-group">
                 <label for="coverImageUrl">Cover Image URL</label>
-                <input type="url" id="coverImageUrl" name="coverImageUrl" placeholder="Enter image URL">
+                <input type="file" id="coverImageUrl" name="coverImageUrl" placeholder="Enter image URL" accept="image/png, image/gif, image/jpeg">
             </div>
 
             <div class="form-buttons">

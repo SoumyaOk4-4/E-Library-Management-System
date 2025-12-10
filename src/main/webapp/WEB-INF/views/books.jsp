@@ -111,6 +111,7 @@
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
         }
         .book-card-author {
@@ -192,13 +193,21 @@
 
 <body>
     <header>
-        <div class="logo-dash-cluster">
-            <div class="logo">
-                <div class="logo-start">E</div>
-                <div class="logo-end">- Library</div>
-            </div>
-            <div class="dashboard">Books</div>
-        </div>
+       <div class="logo-dash-cluster">
+    <div class="logo">
+        <div class="logo-start">E</div>
+        <div class="logo-end">- Library</div>
+    </div>
+
+    <div class="dashboard"><a href="/" style="text-decoration: none;
+            color:white;
+            text-decoration:none;
+            display:inline-block;
+            transition:0.25s;
+       ">Go Back</a></div>
+
+</div>
+
         <div class="search-bar">
             <form action="${pageContext.request.contextPath}/books/search" method="GET" style="display: flex; gap: 10px; width: 100%;">
                 <input type="text" name="query" placeholder="Search books...">

@@ -10,7 +10,15 @@
 </head>
 <body>
     <header>
-        <h1>📚 E-Library Management System</h1>
+        <h1><a href="${pageContext.request.contextPath}/" style="
+                font-family:Poppins, sans-serif;
+                font-size:34px;
+                font-weight:700;
+                color:#f3f4f6;
+                text-decoration:none;
+                letter-spacing:1px;
+                transition:0.3s ease;
+            ">📚 E-Library Management System</a></h1>
     </header>
     
     <nav>

@@ -32,16 +32,29 @@ public class BorrowingService {
         Optional<Book> book = bookRepository.findById(bookId);
 
         if (user.isPresent() && book.isPresent()) {
+            User userObj = user.get();
             Book bookObj = book.get();
+            
+            // CHECK: User already borrowed this book and hasn't returned it?
+            List<Borrowing> activeBorrowings = borrowingRepository.findByUserAndBookAndStatus(
+                userObj, bookObj, "BORROWED"
+            );
+            
+            if (activeBorrowings != null && !activeBorrowings.isEmpty()) {
+                // User already has an active borrowing of this book
+                System.out.println("User already has this book borrowed!");
+                return null;
+            }
             
             // Check if book is available
             if (!bookObj.getAvailable() || bookObj.getQuantity() <= 0) {
+                System.out.println("Book not available!");
                 return null;
             }
 
             // Create borrowing record
             Borrowing borrowing = new Borrowing();
-            borrowing.setUser(user.get());
+            borrowing.setUser(userObj);
             borrowing.setBook(bookObj);
             borrowing.setBorrowDate(LocalDate.now());
             borrowing.setDueDate(LocalDate.now().plusDays(7)); // 7 days to return

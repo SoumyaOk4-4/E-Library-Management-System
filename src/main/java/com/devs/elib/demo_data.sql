@@ -46,3 +46,24 @@ INSERT INTO books (id, name, author, publisher, quantity, description, available
 ('B010', 'Harry Potter and the Philosophers Stone', 'J.K. Rowling', 'Bloomsbury', 9, 'The first book in the Harry Potter series about a young wizard discovering his powers.', true),
 ('B011', 'The Chronicles of Narnia', 'C.S. Lewis', 'Geoffrey Bles', 6, 'A series of fantasy novels set in the magical land of Narnia.', true),
 ('B012', 'Moby Dick', 'Herman Melville', 'Richard Bentley', 3, 'An epic tale of Captain Ahab pursuit of the white whale.', true);
+
+-- Create Borrowings Table
+CREATE TABLE IF NOT EXISTS borrowings (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    book_id VARCHAR(50) NOT NULL,
+    borrow_date DATE NOT NULL,
+    due_date DATE NOT NULL,
+    return_date DATE,
+    fine DECIMAL(10, 2) DEFAULT 0.0,
+    status VARCHAR(20) DEFAULT 'BORROWED',
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (book_id) REFERENCES books(id)
+);
+
+-- Insert Demo Borrowings
+INSERT INTO borrowings (user_id, book_id, borrow_date, due_date, return_date, status) VALUES
+(2, 'B001', DATE_SUB(CURDATE(), INTERVAL 10 DAY), DATE_SUB(CURDATE(), INTERVAL 3 DAY), NULL, 'BORROWED'),
+(2, 'B002', DATE_SUB(CURDATE(), INTERVAL 5 DAY), DATE_ADD(CURDATE(), INTERVAL 2 DAY), NULL, 'BORROWED'),
+(3, 'B003', DATE_SUB(CURDATE(), INTERVAL 15 DAY), DATE_SUB(CURDATE(), INTERVAL 8 DAY), DATE_SUB(CURDATE(), INTERVAL 5 DAY), 'RETURNED'),
+(4, 'B004', CURDATE(), DATE_ADD(CURDATE(), INTERVAL 7 DAY), NULL, 'BORROWED');

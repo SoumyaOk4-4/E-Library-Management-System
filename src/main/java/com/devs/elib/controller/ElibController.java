@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ElibController {
 
     @GetMapping("/")
-    public String Index() {
+    public String index() {
         return "index";
     }
 
@@ -15,5 +15,14 @@ public class ElibController {
     public String dashboard() {
         return "dashboard";
     }
-    
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/signup")
+    public String signup() {
+        return "signup";
+    }
 }

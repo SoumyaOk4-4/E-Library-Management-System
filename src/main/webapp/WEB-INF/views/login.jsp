@@ -129,7 +129,7 @@
         </form>
 
         <div class="signup-link">
-            Don't have an account? <a href="${pageContext.request.contextPath}/signup.jsp">Sign Up</a>
+            Don't have an account? <a href="${pageContext.request.contextPath}/signup">Sign Up</a>
         </div>
     </div>
 </body>

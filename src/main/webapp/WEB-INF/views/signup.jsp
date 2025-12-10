@@ -140,7 +140,7 @@
         </form>
 
         <div class="login-link">
-            Already have an account? <a href="${pageContext.request.contextPath}/login.jsp">Login</a>
+            Already have an account? <a href="${pageContext.request.contextPath}/login">Login</a>
         </div>
     </div>
 </body>

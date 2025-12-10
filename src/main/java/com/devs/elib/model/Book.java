@@ -1,10 +1,14 @@
 package com.devs.elib.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,6 +33,9 @@ public class Book {
     private String coverImageUrl;
     
     private Boolean available;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private List<Borrowing> borrowings;
 
     public String getId() {
         return id;
@@ -92,5 +99,12 @@ public class Book {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+    public List<Borrowing> getBorrowings() {
+        return borrowings;
+    }
+
+    public void setBorrowings(List<Borrowing> borrowings) {
+        this.borrowings = borrowings;
     }
 }

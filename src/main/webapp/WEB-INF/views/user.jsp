@@ -10,83 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/user.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        .users-container {
-            padding: 30px;
-        }
-        .users-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        .users-header h2 {
-            color: #333;
-            margin: 0;
-        }
-        .back-btn {
-            padding: 10px 20px;
-            background-color: #757575;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-        .back-btn:hover {
-            background-color: #616161;
-        }
-        .users-table-wrapper {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table thead {
-            background-color: #667eea;
-            color: white;
-        }
-        table th {
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-        table td {
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        table tbody tr:hover {
-            background-color: #f5f5f5;
-        }
-        .role-badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-        }
-        .role-customer {
-            background-color: #e3f2fd;
-            color: #1976d2;
-        }
-        .role-admin {
-            background-color: #fff3e0;
-            color: #f57c00;
-        }
-        .no-users {
-            text-align: center;
-            padding: 60px 20px;
-            color: #999;
-        }
-        .no-users i {
-            font-size: 60px;
-            margin-bottom: 20px;
-            opacity: 0.5;
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/user.css">
 </head>
 
 <body>
@@ -166,26 +90,35 @@
                                         <th>Email</th>
                                         <th>Phone Number</th>
                                         <th>Role</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:forEach var="u" items="${userdata}">
                                         <tr>
-                                            <td>${u.id}</td>
-                                            <td>${u.name}</td>
-                                            <td>${u.email}</td>
-                                            <td>${u.phno}</td>
-                                            <td>
-                                                <c:choose>
-                                                    <c:when test="${u.role == 'admin'}">
-                                                        <span class="role-badge role-admin">Admin</span>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <span class="role-badge role-customer">Customer</span>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </td>
-                                        </tr>
+                                                <td>${u.id}</td>
+                                                <td>${u.name}</td>
+                                                <td>${u.email}</td>
+                                                <td>${u.phno}</td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${u.role == 'admin'}">
+                                                            <span class="role-badge role-admin">Admin</span>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <span class="role-badge role-customer">Customer</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td class="action-column">
+                                                    <a href="${pageContext.request.contextPath}/viewusers/edit/${u.id}" class="btn-edit">
+                                                        <i class="fa-solid fa-pen"></i> Edit
+                                                    </a>
+                                                    <a href="${pageContext.request.contextPath}/viewusers/delete/${u.id}" class="btn-delete" onclick="return confirm('Delete this user?');">
+                                                        <i class="fa-solid fa-trash"></i> Delete
+                                                    </a>
+                                                </td>
+                                            </tr>
                                     </c:forEach>
                                 </tbody>
                             </table>

@@ -1,0 +1,141 @@
+/* Page Background */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+}
+
+/* Container */
+.users-container {
+    width: 650px;
+    margin: 40px auto;
+    padding: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Header */
+.users-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.users-header h2 {
+    font-size: 26px;
+    font-weight: 600;
+    color: #333;
+}
+
+.back-btn {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    background: #4a76fd;
+    padding: 8px 14px;
+    border-radius: 6px;
+    color: white;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+.back-btn i {
+    margin-right: 8px;
+}
+
+.back-btn:hover {
+    background: #345ef5;
+}
+
+/* Form */
+form {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #c6c6c6;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #4a76fd;
+    box-shadow: 0 0 4px rgba(74, 118, 253, 0.4);
+}
+
+/* Buttons */
+.btn-edit {
+    background: #28a745;
+    border: none;
+    padding: 10px 18px;
+    color: white;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.btn-edit:hover {
+    background: #1e8d3a;
+}
+
+.btn-delete {
+    background: #d9534f;
+    text-decoration: none;
+    padding: 10px 18px;
+    color: white;
+    font-size: 15px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.btn-delete:hover {
+    background: #c9302c;
+}
+
+/* User Not Found Box */
+.no-users {
+    text-align: center;
+    padding: 40px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.no-users i {
+    font-size: 45px;
+    color: #a0a0a0;
+    margin-bottom: 10px;
+}
+
+.no-users h3 {
+    margin: 10px 0 5px;
+    font-size: 22px;
+}

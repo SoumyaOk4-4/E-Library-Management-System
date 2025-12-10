@@ -1,4 +1,4 @@
-package com.devs.elib.service;
+package com.devs.elib.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

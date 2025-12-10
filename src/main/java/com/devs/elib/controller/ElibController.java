@@ -11,7 +11,7 @@ public class ElibController {
         return "index";
     }
 
-    @GetMapping("/dash")
+    @GetMapping("/dashboard")
     public String dashboard() {
         return "dashboard";
     }

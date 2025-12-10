@@ -242,8 +242,8 @@
                         <div class="book-card">
                             <div class="book-card-image">
                                 <c:choose>
-                                    <c:when test="${not empty book.coverImageUrl}">
-                                        <img src="${book.coverImageUrl}" alt="${book.name}">
+                                    <c:when test="${not empty book.coverImage}">
+                                        <img src="${pageContext.request.contextPath}/images/${book.id}/${book.coverImage}" alt="${book.name}">
                                     </c:when>
                                     <c:otherwise>
                                         <i class="fa-solid fa-book" style="font-size: 60px; color: #ddd;"></i>

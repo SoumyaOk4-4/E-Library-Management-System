@@ -98,7 +98,7 @@
 
     <div class="form-container">
         <h2>Edit Book</h2>
-        <form action="${pageContext.request.contextPath}/books/edit/${book.id}" method="POST">
+        <form action="${pageContext.request.contextPath}/books/edit/${book.id}" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Book Name *</label>
                 <input type="text" id="name" name="name" required value="${book.name}">
@@ -125,8 +125,8 @@
             </div>
 
             <div class="form-group">
-                <label for="coverImageUrl">Cover Image URL</label>
-                <input type="url" id="coverImageUrl" name="coverImageUrl" value="${book.coverImageUrl}">
+                <label for="coverImage">Cover Image</label>
+                <input type="file" id="coverImage" name="coverImage" accept="image/*">
             </div>
 
             <div class="form-buttons">

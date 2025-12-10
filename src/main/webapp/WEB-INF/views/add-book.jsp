@@ -98,7 +98,7 @@
 
     <div class="form-container">
         <h2>Add New Book</h2>
-        <form action="${pageContext.request.contextPath}/books/add" method="POST">
+        <form action="${pageContext.request.contextPath}/books/add" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Book Name *</label>
                 <input type="text" id="name" name="name" required placeholder="Enter book name">
@@ -125,8 +125,8 @@
             </div>
 
             <div class="form-group">
-                <label for="coverImageUrl">Cover Image URL</label>
-                <input type="file" id="coverImageUrl" name="coverImageUrl" placeholder="Enter image URL" accept="image/png, image/gif, image/jpeg">
+                <label for="coverImage">Cover Image</label>
+                <input type="file" id="coverImage" name="coverImage" accept="image/*">
             </div>
 
             <div class="form-buttons">

@@ -173,8 +173,8 @@
         <div class="book-header">
             <div class="book-cover">
                 <c:choose>
-                    <c:when test="${not empty book.coverImageUrl}">
-                        <img src="${book.coverImageUrl}" alt="${book.name}">
+                    <c:when test="${not empty book.coverImage}">
+                        <img src="${pageContext.request.contextPath}/images/${book.id}/${book.coverImage}" alt="${book.name}">
                     </c:when>
                     <c:otherwise>
                         <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: #ddd;">

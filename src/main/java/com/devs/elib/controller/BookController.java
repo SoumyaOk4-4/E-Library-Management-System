@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.devs.elib.model.Book;
 import com.devs.elib.services.BookService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/books")
 public class BookController {
@@ -22,7 +24,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    // Display all books
+    // Display all books - PUBLIC
     @GetMapping("")
     public String getAllBooks(Model model) {
         List<Book> books = bookService.getAllBooks();
@@ -30,7 +32,7 @@ public class BookController {
         return "books";
     }
 
-    // Display book by ID
+    // Display book by ID - PUBLIC
     @GetMapping("/{id}")
     public String getBookById(@PathVariable String id, Model model) {
         Optional<Book> book = bookService.getBookById(id);
@@ -41,23 +43,44 @@ public class BookController {
         return "redirect:/books";
     }
 
-    // Show add book form
+    // Show add book form - ADMIN ONLY
     @GetMapping("/add")
-    public String showAddBookForm(Model model) {
+    public String showAddBookForm(HttpSession session, Model model) {
+        String role = (String) session.getAttribute("role");
+        
+        // Check if user is logged in and is admin
+        if (role == null || !role.equals("admin")) {
+            return "redirect:/login";
+        }
+        
         model.addAttribute("book", new Book());
         return "add-book";
     }
 
-    // Save new book
+    // Save new book - ADMIN ONLY
     @PostMapping("/add")
-    public String addBook(Book book) {
+    public String addBook(Book book, HttpSession session) {
+        String role = (String) session.getAttribute("role");
+        
+        // Check if user is logged in and is admin
+        if (role == null || !role.equals("admin")) {
+            return "redirect:/login";
+        }
+        
         bookService.saveBook(book);
         return "redirect:/books";
     }
 
-    // Show edit book form
+    // Show edit book form - ADMIN ONLY
     @GetMapping("/edit/{id}")
-    public String showEditBookForm(@PathVariable String id, Model model) {
+    public String showEditBookForm(@PathVariable String id, HttpSession session, Model model) {
+        String role = (String) session.getAttribute("role");
+        
+        // Check if user is logged in and is admin
+        if (role == null || !role.equals("admin")) {
+            return "redirect:/login";
+        }
+        
         Optional<Book> book = bookService.getBookById(id);
         if (book.isPresent()) {
             model.addAttribute("book", book.get());
@@ -66,21 +89,35 @@ public class BookController {
         return "redirect:/books";
     }
 
-    // Update book
+    // Update book - ADMIN ONLY
     @PostMapping("/edit/{id}")
-    public String editBook(@PathVariable String id, Book bookDetails) {
+    public String editBook(@PathVariable String id, Book bookDetails, HttpSession session) {
+        String role = (String) session.getAttribute("role");
+        
+        // Check if user is logged in and is admin
+        if (role == null || !role.equals("admin")) {
+            return "redirect:/login";
+        }
+        
         bookService.updateBook(id, bookDetails);
         return "redirect:/books";
     }
 
-    // Delete book
+    // Delete book - ADMIN ONLY
     @GetMapping("/delete/{id}")
-    public String deleteBook(@PathVariable String id) {
+    public String deleteBook(@PathVariable String id, HttpSession session) {
+        String role = (String) session.getAttribute("role");
+        
+        // Check if user is logged in and is admin
+        if (role == null || !role.equals("admin")) {
+            return "redirect:/login";
+        }
+        
         bookService.deleteBook(id);
         return "redirect:/books";
     }
 
-    // Search books by name or author
+    // Search books - PUBLIC
     @GetMapping("/search")
     public String searchBooks(@RequestParam String query, Model model) {
         List<Book> books = bookService.searchBooks(query);
@@ -89,12 +126,11 @@ public class BookController {
         return "books";
     }
 
-    // Get available books only
+    // Get available books only - PUBLIC
     @GetMapping("/available")
     public String getAvailableBooks(Model model) {
         List<Book> books = bookService.getAvailableBooks();
         model.addAttribute("books", books);
         return "books";
     }
-
 }

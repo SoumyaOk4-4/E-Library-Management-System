@@ -37,9 +37,8 @@ public class Borrowing {
     private Double fine = 0.0;
     
     @Column(length = 20)
-    private String status = "BORROWED"; // BORROWED, RETURNED
+    private String status = "BORROWED";
     
-    // Constructors
     public Borrowing() {}
     
     public Borrowing(User user, Book book, LocalDate borrowDate, LocalDate dueDate) {
@@ -50,7 +49,6 @@ public class Borrowing {
         this.status = "BORROWED";
     }
     
-    // Calculate fine (Rs. 10 per day overdue)
     public Double calculateFine() {
         if (returnDate == null) {
             LocalDate today = LocalDate.now();
@@ -65,12 +63,10 @@ public class Borrowing {
         return this.fine;
     }
     
-    // Check if overdue
     public boolean isOverdue() {
         return LocalDate.now().isAfter(dueDate) && status.equals("BORROWED");
     }
     
-    // Getters and Setters
     public int getId() {
         return id;
     }

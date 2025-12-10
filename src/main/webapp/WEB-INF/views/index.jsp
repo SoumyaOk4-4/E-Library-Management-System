@@ -16,12 +16,20 @@
     <nav>
         <a href="${pageContext.request.contextPath}/">Home</a>
         <a href="${pageContext.request.contextPath}/books">Browse Books</a>
+        <%
+            String userEmail = (String) session.getAttribute("udata");
+            if (userEmail != null) {
+        %>
+            <a href="${pageContext.request.contextPath}/borrowing/mybookings">My Books</a>
+        <%
+            }
+        %>
         <div class="auth-buttons">
             <%
-                String userEmail = (String) session.getAttribute("udata");
+                String role = (String) session.getAttribute("role");
                 if (userEmail != null) {
             %>
-                <span style="color: white; padding: 15px 15px;">Welcome, <%= userEmail %></span>
+                <span style="color: white; padding: 15px 15px;">Welcome, <%= userEmail %> <% if ("admin".equals(role)) { %><span style="font-size: 12px; background: #ff9800; padding: 2px 8px; border-radius: 3px;">ADMIN</span><% } %></span>
                 <a href="${pageContext.request.contextPath}/logout" class="logout-btn">Logout</a>
             <%
                 } else {
@@ -53,17 +61,37 @@
                 <p>View all currently available books</p>
             </a>
 
-            <a href="${pageContext.request.contextPath}/viewusers" class="quick-link-card">
-                <i class="fa-solid fa-users"></i>
-                <h3>Users</h3>
-                <p>View all registered users</p>
-            </a>
+            <%
+                if ("admin".equals(role)) {
+            %>
+                <a href="${pageContext.request.contextPath}/viewusers" class="quick-link-card">
+                    <i class="fa-solid fa-users"></i>
+                    <h3>Users</h3>
+                    <p>View all registered users</p>
+                </a>
 
-            <a href="${pageContext.request.contextPath}/books/add" class="quick-link-card">
-                <i class="fa-solid fa-plus"></i>
-                <h3>Add New Book</h3>
-                <p>Add a new book to the library</p>
-            </a>
+                <a href="${pageContext.request.contextPath}/books/add" class="quick-link-card">
+                    <i class="fa-solid fa-plus"></i>
+                    <h3>Add New Book</h3>
+                    <p>Add a new book to the library</p>
+                </a>
+
+                <a href="${pageContext.request.contextPath}/dashboard" class="quick-link-card">
+                    <i class="fa-solid fa-chart-bar"></i>
+                    <h3>Dashboard</h3>
+                    <p>View admin dashboard</p>
+                </a>
+            <%
+                } else if (userEmail != null) {
+            %>
+                <a href="${pageContext.request.contextPath}/borrowing/mybookings" class="quick-link-card">
+                    <i class="fa-solid fa-bookmark"></i>
+                    <h3>My Books</h3>
+                    <p>View your borrowed books</p>
+                </a>
+            <%
+                }
+            %>
         </div>
     </div>
 

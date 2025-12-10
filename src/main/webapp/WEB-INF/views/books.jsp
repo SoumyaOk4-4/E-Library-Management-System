@@ -199,6 +199,12 @@
             </div>
             <div class="dashboard">Books</div>
         </div>
+        <div class="search-bar">
+            <form action="${pageContext.request.contextPath}/books/search" method="GET" style="display: flex; gap: 10px; width: 100%;">
+                <input type="text" name="query" placeholder="Search books...">
+                <button type="submit" style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 4px; cursor: pointer;">Search</button>
+            </form>
+        </div>
     </header>
 
     <div class="books-container">
@@ -210,7 +216,14 @@
                     <button type="submit">Search</button>
                 </form>
             </div>
-            <a href="${pageContext.request.contextPath}/books/add" class="add-btn">+ Add Book</a>
+            <%
+                String role = (String) session.getAttribute("role");
+                if ("admin".equals(role)) {
+            %>
+                <a href="${pageContext.request.contextPath}/books/add" class="add-btn">+ Add Book</a>
+            <%
+                }
+            %>
         </div>
 
         <c:choose>
@@ -246,8 +259,15 @@
                                 </div>
                                 <div class="book-card-actions">
                                     <a href="${pageContext.request.contextPath}/books/${book.id}" class="btn-view">View</a>
-                                    <a href="${pageContext.request.contextPath}/books/edit/${book.id}" class="btn-edit">Edit</a>
-                                    <a href="${pageContext.request.contextPath}/books/delete/${book.id}" class="btn-delete" onclick="return confirm('Are you sure?');">Delete</a>
+                                    <%
+                                        String userRole = (String) session.getAttribute("role");
+                                        if ("admin".equals(userRole)) {
+                                    %>
+                                        <a href="${pageContext.request.contextPath}/books/edit/${book.id}" class="btn-edit">Edit</a>
+                                        <a href="${pageContext.request.contextPath}/books/delete/${book.id}" class="btn-delete" onclick="return confirm('Are you sure you want to delete this book?');">Delete</a>
+                                    <%
+                                        }
+                                    %>
                                 </div>
                             </div>
                         </div>
@@ -259,7 +279,14 @@
                     <i class="fa-solid fa-book"></i>
                     <h3>No Books Found</h3>
                     <p>Start by adding your first book!</p>
-                    <a href="${pageContext.request.contextPath}/books/add" class="add-btn" style="display: inline-block; margin-top: 20px;">+ Add Book</a>
+                    <%
+                        String adminRole = (String) session.getAttribute("role");
+                        if ("admin".equals(adminRole)) {
+                    %>
+                        <a href="${pageContext.request.contextPath}/books/add" class="add-btn" style="display: inline-block; margin-top: 20px;">+ Add Book</a>
+                    <%
+                        }
+                    %>
                 </div>
             </c:otherwise>
         </c:choose>

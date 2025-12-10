@@ -41,11 +41,14 @@ public class UserController {
         User user = userService.loginUser(email, pass);
         if (user != null) {
             String role = user.getRole();
-            if (role.equals("customer")) {
-                session.setAttribute("udata", email);
-                return "index";
-            } else {
+            session.setAttribute("udata", email);
+            session.setAttribute("userId", user.getId());
+            session.setAttribute("role", role);
+            
+            if (role.equals("admin")) {
                 return "redirect:/dashboard";
+            } else {
+                return "redirect:/";
             }
         } else {
             model.put("msg", "Wrong credentials, try again!");
@@ -60,7 +63,14 @@ public class UserController {
     }
 
     @GetMapping("/viewusers")
-    public String getAllUsers(Model model) {
+    public String getAllUsers(HttpSession session, Model model) {
+        String role = (String) session.getAttribute("role");
+        
+        // Check if user is logged in and is admin
+        if (role == null || !role.equals("admin")) {
+            return "redirect:/login";
+        }
+        
         List<User> users = userService.getAllUsers();
         model.addAttribute("userdata", users);
         return "user";

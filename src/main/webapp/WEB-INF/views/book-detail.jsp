@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -89,6 +90,7 @@
             margin-top: 30px;
             border-top: 1px solid #eee;
             padding-top: 20px;
+            flex-wrap: wrap;
         }
         .btn {
             padding: 12px 25px;
@@ -98,6 +100,21 @@
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-borrow {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .btn-borrow:hover {
+            background-color: #45a049;
+        }
+        .btn-borrow:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
         }
         .btn-edit {
             background-color: #2196F3;
@@ -186,12 +203,30 @@
         </div>
 
         <div class="action-buttons">
-            <a href="${pageContext.request.contextPath}/books/edit/${book.id}" class="btn btn-edit">
-                <i class="fa-solid fa-edit"></i> Edit
-            </a>
-            <a href="${pageContext.request.contextPath}/books/delete/${book.id}" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this book?');">
-                <i class="fa-solid fa-trash"></i> Delete
-            </a>
+            <%
+                String userEmail = (String) session.getAttribute("udata");
+                String role = (String) session.getAttribute("role");
+                Boolean available = (Boolean) pageContext.getRequest().getAttribute("available");
+            %>
+            
+            <!-- Borrow Button - Only for logged-in non-admin users -->
+            <% if (userEmail != null && !"admin".equals(role)) { %>
+                <a href="${pageContext.request.contextPath}/borrowing/borrow/${book.id}" class="btn btn-borrow">
+                    <i class="fa-solid fa-download"></i> Borrow Book
+                </a>
+            <% } %>
+            
+            <!-- Edit and Delete Buttons - Only for admin users -->
+            <% if ("admin".equals(role)) { %>
+                <a href="${pageContext.request.contextPath}/books/edit/${book.id}" class="btn btn-edit">
+                    <i class="fa-solid fa-edit"></i> Edit
+                </a>
+                <a href="${pageContext.request.contextPath}/books/delete/${book.id}" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this book?');">
+                    <i class="fa-solid fa-trash"></i> Delete
+                </a>
+            <% } %>
+            
+            <!-- Back Button - Always visible -->
             <a href="${pageContext.request.contextPath}/books" class="btn btn-back">
                 <i class="fa-solid fa-arrow-left"></i> Back to Books
             </a>

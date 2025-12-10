@@ -11,7 +11,7 @@ body {
 }
 
 header {
-  font-size: 22px;
+  font-size: 25px;
   font-weight: 500;
   padding: 20px;
   margin-top: 10px;
@@ -40,6 +40,28 @@ header {
     justify-content: center;
     align-items: center;
     gap: 70px;
+}
+
+.notif-profile-cluster {
+    gap: 30px;
+}
+
+.logo-dash-cluster .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.logo-dash-cluster .logo .logo-start {
+    font-size: 40px;
+    font-weight: 600;
+    color: red;
+}
+
+.logo-dash-cluster .logo .logo-end{
+    font-size: 35px;
+    font-weight: 600;
 }
 
 .notif-profile-cluster .profile {
@@ -75,9 +97,14 @@ header {
 
 .middle .sidebar .api-call-btn {
     width: 100%;
-    padding: 20px;
+}
+
+.middle .sidebar .api-call-btn a {
     display: flex;
+    padding: 20px;
     gap: 20px;
+    color: white;
+    text-decoration: none;
 }
 
 .middle .sidebar .api-call-btn:hover {

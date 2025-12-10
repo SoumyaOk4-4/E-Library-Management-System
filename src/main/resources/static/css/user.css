@@ -1,0 +1,55 @@
+.middle .view {
+    align-items: none;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.middle .view .user-area {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.middle .view .user-area .add-user {
+    background-color: white;
+    padding: 12px;
+    border-radius: 6px;
+    color: black;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+table {
+  width: 90%;
+  padding: 20px;
+  border-radius: 10px;
+  background: rgb(80, 80, 80);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.separator hr {
+    border: 1px solid white;
+    margin: 0;
+}
+
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  color: white;
+}
+
+tr {
+  cursor: pointer;
+}

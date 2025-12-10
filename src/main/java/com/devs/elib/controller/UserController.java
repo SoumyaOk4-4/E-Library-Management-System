@@ -11,59 +11,58 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.devs.elib.model.User;
-import com.devs.elib.repository.UserRepository;
+import com.devs.elib.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
-	@Autowired
-	UserRepository urepo;
 
-	@PostMapping("/regproc")
-	public String regProcess(@RequestParam("name") String name, @RequestParam("email") String email,
-			@RequestParam("phone") String phno, @RequestParam("password") String pass, ModelMap model) {
-		User user = new User();
-		user.setName(name);
-		user.setEmail(email);
-		user.setPhno(Long.parseLong(phno));
-		user.setPassword(pass);
-		user.setRole("customer");
-		urepo.save(user);
-		model.put("msg", "Sucessfully Registered!");
-		return "signup";
-	}
+    @Autowired
+    private UserService userService;
 
-	@PostMapping("/logproc")
-	public String loginProcess(@RequestParam("email") String email, @RequestParam("password") String pass,
-			ModelMap model, HttpSession session) {
-		User user = null;
-		user = urepo.findByEmailAndPassword(email, pass);
-		if (user != null) {
-			String role = user.getRole();
-			if (role.equals("customer")) {
-				session.setAttribute("udata", email);
-				return "index";
-			} else {
-				return "redirect:/viewitems";
-			}
-		} else {
-			model.put("msg", "Wrong credential try again!");
-			return "login";
-		}
-	}
+    @PostMapping("/regproc")
+    public String regProcess(@RequestParam("name") String name, @RequestParam("email") String email,
+            @RequestParam("phone") String phno, @RequestParam("password") String pass, ModelMap model) {
+        try {
+            userService.registerUser(name, email, phno, pass);
+            model.put("msg", "Successfully Registered!");
+            return "signup";
+        } catch (Exception e) {
+            model.put("msg", "Registration failed: " + e.getMessage());
+            return "signup";
+        }
+    }
 
-	@GetMapping("/logout")
-	public String logout(HttpServletRequest request) {
-		request.getSession().invalidate();
-		return "index";
-	}
+    @PostMapping("/logproc")
+    public String loginProcess(@RequestParam("email") String email, @RequestParam("password") String pass,
+            ModelMap model, HttpSession session) {
+        User user = userService.loginUser(email, pass);
+        if (user != null) {
+            String role = user.getRole();
+            if (role.equals("customer")) {
+                session.setAttribute("udata", email);
+                return "index";
+            } else {
+                return "redirect:/dashboard";
+            }
+        } else {
+            model.put("msg", "Wrong credentials, try again!");
+            return "login";
+        }
+    }
 
-	@GetMapping("/viewusers")
-	public String getAllUsers(Model model) {
-		List<User> user = urepo.findAll();
-		model.addAttribute("userdata", user);
-		return "user";
-	}
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "redirect:/";
+    }
+
+    @GetMapping("/viewusers")
+    public String getAllUsers(Model model) {
+        List<User> users = userService.getAllUsers();
+        model.addAttribute("userdata", users);
+        return "user";
+    }
 }

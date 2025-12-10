@@ -46,7 +46,11 @@ public class BookService {
             existingBook.setPublisher(bookDetails.getPublisher());
             existingBook.setQuantity(bookDetails.getQuantity());
             existingBook.setDescription(bookDetails.getDescription());
-            existingBook.setCoverImageUrl(bookDetails.getCoverImageUrl());
+            
+            // Only update cover image if a new one is provided
+            if (bookDetails.getCoverImage() != null && !bookDetails.getCoverImage().isEmpty()) {
+                existingBook.setCoverImage(bookDetails.getCoverImage());
+            }
             
             // Update availability based on quantity
             if (bookDetails.getQuantity() > 0) {

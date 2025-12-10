@@ -20,7 +20,7 @@ public class Book {
     
     private String name;
     
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String author;
     
     private String publisher;
@@ -28,13 +28,11 @@ public class Book {
     private int quantity;
     
     private String description;
-    
-    @Column(name = "coverImageUrl")
-    private String coverImageUrl;
-    
-    private Boolean available;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @Column(name = "coverImage")
+    private String coverImage;
+
+    private Boolean available;    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<Borrowing> borrowings;
 
     public String getId() {
@@ -79,11 +77,11 @@ public class Book {
         this.description = description;
     }
 
-    public String getCoverImageUrl() {
-        return coverImageUrl;
+    public String getCoverImage() {
+        return coverImage;
     }
-    public void setCoverImageUrl(String coverImageUrl) {
-        this.coverImageUrl = coverImageUrl;
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
     }
 
     public Boolean getAvailable() {

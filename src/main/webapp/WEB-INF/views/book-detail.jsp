@@ -8,148 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${book.name} - E-Library</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/book-detail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        .book-detail-container {
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-        }
-        .book-header {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 30px;
-            align-items: flex-start;
-        }
-        .book-cover {
-            flex-shrink: 0;
-            width: 200px;
-            height: 280px;
-            background: #e0e0e0;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .book-cover img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .book-info h2 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 28px;
-        }
-        .book-meta {
-            margin-bottom: 20px;
-        }
-        .meta-item {
-            margin-bottom: 12px;
-            font-size: 16px;
-        }
-        .meta-item strong {
-            color: #555;
-            min-width: 100px;
-            display: inline-block;
-        }
-        .meta-item span {
-            color: #333;
-        }
-        .availability {
-            padding: 10px 15px;
-            border-radius: 4px;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-        .available {
-            background-color: #4CAF50;
-            color: white;
-        }
-        .unavailable {
-            background-color: #f44336;
-            color: white;
-        }
-        .book-description {
-            margin-top: 25px;
-        }
-        .book-description h3 {
-            color: #333;
-            margin-bottom: 15px;
-        }
-        .book-description p {
-            color: #666;
-            line-height: 1.6;
-        }
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
-            flex-wrap: wrap;
-        }
-        .btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-borrow {
-            background-color: #4CAF50;
-            color: white;
-        }
-        .btn-borrow:hover {
-            background-color: #45a049;
-        }
-        .btn-borrow:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-        .btn-edit {
-            background-color: #2196F3;
-            color: white;
-        }
-        .btn-edit:hover {
-            background-color: #0b7dda;
-        }
-        .btn-delete {
-            background-color: #f44336;
-            color: white;
-        }
-        .btn-delete:hover {
-            background-color: #da190b;
-        }
-        .btn-back {
-            background-color: #757575;
-            color: white;
-        }
-        .btn-back:hover {
-            background-color: #616161;
-        }
-        .error-message {
-            background-color: #ffebee;
-            color: #c62828;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            display: none;
-            border-left: 4px solid #c62828;
-        }
-        .error-message.show {
-            display: block;
-        }
-    </style>
 </head>
 
 <body>
@@ -173,8 +33,8 @@
         <div class="book-header">
             <div class="book-cover">
                 <c:choose>
-                    <c:when test="${not empty book.coverImageUrl}">
-                        <img src="${book.coverImageUrl}" alt="${book.name}">
+                    <c:when test="${not empty book.coverImage}">
+                        <img src="${pageContext.request.contextPath}/images/${book.id}/${book.coverImage}" alt="${book.name}">
                     </c:when>
                     <c:otherwise>
                         <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: #ddd;">

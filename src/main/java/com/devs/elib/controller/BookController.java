@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.validation.BindingResult;
 
 import com.devs.elib.config.FileUploadProperties;
 import com.devs.elib.model.Book;
 import com.devs.elib.services.BookService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/books")
@@ -66,13 +68,22 @@ public class BookController {
 
     // Save new book - ADMIN ONLY
     @PostMapping("/add")
-    public String addBook(Book book, @RequestParam(required = false) MultipartFile coverImage, HttpSession session)
+    public String addBook(@Valid Book book, BindingResult bindingResult, 
+            @RequestParam("image") MultipartFile coverImage, 
+            HttpSession session, Model model)
             throws IOException {
         String role = (String) session.getAttribute("role");
 
         // Check if user is logged in and is admin
         if (role == null || !role.equals("admin")) {
             return "redirect:/login";
+        }
+
+        // Check for binding errors
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("book", book);
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "add-book";
         }
 
         Book savedBook = bookService.saveBook(book);

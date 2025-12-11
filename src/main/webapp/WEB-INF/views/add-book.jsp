@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +25,18 @@
 
     <div class="form-container">
         <h2>Add New Book</h2>
+        
+        <c:if test="${not empty errors}">
+            <div style="background-color:#ffebee; color:#c62828; padding:15px; border-radius:4px; margin-bottom:20px;">
+                <strong>Validation Errors:</strong>
+                <ul>
+                    <c:forEach var="error" items="${errors}">
+                        <li>${error.defaultMessage}</li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </c:if>
+        
         <form action="${pageContext.request.contextPath}/books/add" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Book Name *</label>
@@ -52,7 +65,7 @@
 
             <div class="form-group">
                 <label for="coverImage">Cover Image</label>
-                <input type="file" id="coverImage" name="coverImage" accept="image/*">
+                <input type="file" id="image" name="image" accept="image/*">
             </div>
 
             <div class="form-buttons">

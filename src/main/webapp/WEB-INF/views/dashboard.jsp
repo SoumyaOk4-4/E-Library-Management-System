@@ -8,6 +8,85 @@
     <title>E-Library - Admin Dashboard</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+         <style>
+        .dashboard-content {
+            padding: 30px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .stat-card i {
+            font-size: 40px;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .stat-card h3 {
+            color: #333;
+            margin: 10px 0 5px;
+        }
+        .stat-card p {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .dashboard-actions {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .dashboard-actions h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .action-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: opacity 0.3s;
+        }
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .btn-info {
+            background-color: #2196F3;
+            color: white;
+        }
+        .btn-warning {
+            background-color: #ff9800;
+            color: white;
+        }
+        .btn-danger {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>

@@ -10,4 +10,5 @@ bugs:
 
 lil ui issue:
 --- img is streaching the book cards make them change the img shapes not the card shapes.
---- localhost:5001/dashboard ui again not showing css making it inline DONT CHANGEEEEEEEEEEE DASHBOARD.JSP!!!!!!!!!!
+--- action btn need to cancel for user
+--- too many search btns and dublicate searchbars 

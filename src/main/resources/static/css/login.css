@@ -11,6 +11,35 @@ body {
     justify-content: center;
     align-items: center;
 }
+.back-btn {
+    background-color: white;
+    position: absolute; 
+    top: 40px; 
+    right: 40px;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    transition: 0.12s ease-in;
+}
+.back-btn:hover {
+    background-color: black;
+}
+.back-btn a {
+    padding: 10px 20px;
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+
+    display: flex;
+    align-items: center;
+    transition: 0.1s ease-in;
+    gap: 6px;
+}
+.back-btn a:hover {
+    color: white;
+}
+.back-btn a i {
+    transform: translateY(2px);
+}
 .login-container {
     background: white;
     border-radius: 10px;

@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 </head>
 <body>
+    <div class="back-btn">
+        <a href="${pageContext.request.contextPath}/">
+            <i class="fa-solid fa-arrow-left"></i> 
+            <p>Back</p>
+        </a>
+    </div>
+    
     <div class="login-container">
         <div class="login-header">
             <h1>📚 E-Library</h1>

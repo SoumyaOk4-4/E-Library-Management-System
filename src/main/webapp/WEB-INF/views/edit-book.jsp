@@ -15,8 +15,10 @@
     <header>
         <div class="logo-dash-cluster">
             <div class="logo">
-                <div class="logo-start">E</div>
-                <div class="logo-end">- Library</div>
+                <a href="${pageContext.request.contextPath}/">
+                    <div class="logo-start">📚 E -</div>
+                    <div class="logo-end"> Library</div>
+                </a>
             </div>
             <div class="dashboard">Edit Book</div>
         </div>

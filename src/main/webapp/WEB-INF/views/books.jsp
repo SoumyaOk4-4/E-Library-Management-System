@@ -15,25 +15,17 @@
 <body>
     <header>
        <div class="logo-dash-cluster">
-    <div class="logo">
-        <div class="logo-start">E</div>
-        <div class="logo-end">- Library</div>
-    </div>
-
-    <div class="dashboard"><a href="/" style="text-decoration: none;
-            color:white;
-            text-decoration:none;
-            display:inline-block;
-            transition:0.25s;
-       ">Go Back</a></div>
-
-</div>
-
-        <div class="search-bar">
-            <form action="${pageContext.request.contextPath}/books/search" method="GET" style="display: flex; gap: 10px; width: 100%;">
-                <input type="text" name="query" placeholder="Search books...">
-                <button type="submit" style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 4px; cursor: pointer;">Search</button>
-            </form>
+            <div class="logo">
+                <a href="${pageContext.request.contextPath}/">
+                    <div class="logo-start">📚 E -</div>
+                    <div class="logo-end"> Library</div>
+                </a>
+            </div>
+            <div class="dashboard">
+                <a href="/">
+                    Go Back
+                </a>
+            </div>
         </div>
     </header>
 

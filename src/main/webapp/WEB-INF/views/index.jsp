@@ -22,13 +22,10 @@
     </header>
     
     <nav>
-        <a href="${pageContext.request.contextPath}/">Home</a>
-        <a href="${pageContext.request.contextPath}/books">Browse Books</a>
         <%
             String userEmail = (String) session.getAttribute("udata");
             if (userEmail != null) {
         %>
-            <a href="${pageContext.request.contextPath}/borrowing/mybookings">My Books</a>
         <%
             }
         %>
@@ -72,22 +69,16 @@
             <%
                 if ("admin".equals(role)) {
             %>
-                <a href="${pageContext.request.contextPath}/viewusers" class="quick-link-card">
-                    <i class="fa-solid fa-users"></i>
-                    <h3>Users</h3>
-                    <p>View all registered users</p>
-                </a>
-
                 <a href="${pageContext.request.contextPath}/books/add" class="quick-link-card">
                     <i class="fa-solid fa-plus"></i>
                     <h3>Add New Book</h3>
                     <p>Add a new book to the library</p>
                 </a>
 
-                <a href="${pageContext.request.contextPath}/dashboard" class="quick-link-card">
-                    <i class="fa-solid fa-chart-bar"></i>
-                    <h3>Dashboard</h3>
-                    <p>View admin dashboard</p>
+                <a href="${pageContext.request.contextPath}/viewusers" class="quick-link-card">
+                    <i class="fa-solid fa-users"></i>
+                    <h3>View Users</h3>
+                    <p>View all registered users</p>
                 </a>
             <%
                 } else if (userEmail != null) {
@@ -104,7 +95,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 E-Library Management System. All rights reserved.</p>
+        <p>&copy; 2025 E-Library Management System. All rights reserved.</p>
     </footer>
 </body>
 </html>

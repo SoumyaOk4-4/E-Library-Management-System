@@ -6,15 +6,32 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Edit User</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/edit-user.css">
 </head>
 <body>
+    <header>
+        <div class="logo-dash-cluster">
+            <div class="logo">
+                <a href="${pageContext.request.contextPath}/">
+                    <div class="logo-start">📚 E -</div>
+                    <div class="logo-end"> Library</div>
+                </a>
+            </div>
+            <div class="dashboard">Edit User</div>
+        </div>
+    </header>
+
 	<div class="users-container">
 		<div class="users-header">
 			<h2>Edit User</h2>
-			<a href="${pageContext.request.contextPath}/viewusers" class="back-btn">
-				<i class="fa-solid fa-arrow-left"></i> Back
-			</a>
+			<div class="back-btn">
+				<a href="${pageContext.request.contextPath}/viewusers">
+					<i class="fa-solid fa-arrow-left"></i> 
+					<p>Back</p>
+				</a>
+    		</div>
 		</div>
 
 		<c:if test="${not empty user}">

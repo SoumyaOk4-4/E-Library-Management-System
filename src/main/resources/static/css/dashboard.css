@@ -40,6 +40,13 @@ header {
   align-items: center;
 }
 
+.logo-dash-cluster a {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .logo {
   display: flex;
   justify-content: center;

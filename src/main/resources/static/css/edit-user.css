@@ -35,23 +35,29 @@ body {
 }
 
 .back-btn {
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    background: #4a76fd;
-    padding: 8px 14px;
-    border-radius: 6px;
-    color: white;
-    font-weight: 500;
-    transition: 0.2s ease;
+    background-color: #667eea;
+    border-radius: 8px;
+    transition: 0.12s ease-in;
 }
-
-.back-btn i {
-    margin-right: 8px;
-}
-
 .back-btn:hover {
-    background: #345ef5;
+    background-color: black;
+}
+.back-btn a {
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+
+    display: flex;
+    align-items: center;
+    transition: 0.1s ease-in;
+    gap: 6px;
+}
+.back-btn a:hover {
+    color: white;
+}
+.back-btn a i {
+    transform: translateY(2px);
 }
 
 /* Form */

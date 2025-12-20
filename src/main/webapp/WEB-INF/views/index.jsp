@@ -69,16 +69,16 @@
             <%
                 if ("admin".equals(role)) {
             %>
-                <a href="${pageContext.request.contextPath}/viewusers" class="quick-link-card">
-                    <i class="fa-solid fa-users"></i>
-                    <h3>Users</h3>
-                    <p>View all registered users</p>
-                </a>
-
                 <a href="${pageContext.request.contextPath}/books/add" class="quick-link-card">
                     <i class="fa-solid fa-plus"></i>
                     <h3>Add New Book</h3>
                     <p>Add a new book to the library</p>
+                </a>
+
+                <a href="${pageContext.request.contextPath}/viewusers" class="quick-link-card">
+                    <i class="fa-solid fa-users"></i>
+                    <h3>View Users</h3>
+                    <p>View all registered users</p>
                 </a>
             <%
                 } else if (userEmail != null) {
@@ -95,7 +95,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 E-Library Management System. All rights reserved.</p>
+        <p>&copy; 2025 E-Library Management System. All rights reserved.</p>
     </footer>
 </body>
 </html>

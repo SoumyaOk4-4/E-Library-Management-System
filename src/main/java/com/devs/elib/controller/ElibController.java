@@ -13,17 +13,17 @@ public class ElibController {
         return "index";
     }
 
-    @GetMapping("/dashboard")
-    public String dashboard(HttpSession session) {
-        String role = (String) session.getAttribute("role");
+    // @GetMapping("/dashboard")
+    // public String dashboard(HttpSession session) {
+    //     String role = (String) session.getAttribute("role");
         
-        // Check if user is logged in and is admin
-        if (role == null || !role.equals("admin")) {
-            return "redirect:/login";
-        }
+    //     // Check if user is logged in and is admin
+    //     if (role == null || !role.equals("admin")) {
+    //         return "redirect:/login";
+    //     }
         
-        return "dashboard";
-    }
+    //     return "dashboard";
+    // }
 
     @GetMapping("/login")
     public String login(HttpSession session) {

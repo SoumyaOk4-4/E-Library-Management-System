@@ -22,13 +22,10 @@
     </header>
     
     <nav>
-        <a href="${pageContext.request.contextPath}/">Home</a>
-        <a href="${pageContext.request.contextPath}/books">Browse Books</a>
         <%
             String userEmail = (String) session.getAttribute("udata");
             if (userEmail != null) {
         %>
-            <a href="${pageContext.request.contextPath}/borrowing/mybookings">My Books</a>
         <%
             }
         %>
@@ -82,12 +79,6 @@
                     <i class="fa-solid fa-plus"></i>
                     <h3>Add New Book</h3>
                     <p>Add a new book to the library</p>
-                </a>
-
-                <a href="${pageContext.request.contextPath}/dashboard" class="quick-link-card">
-                    <i class="fa-solid fa-chart-bar"></i>
-                    <h3>Dashboard</h3>
-                    <p>View admin dashboard</p>
                 </a>
             <%
                 } else if (userEmail != null) {

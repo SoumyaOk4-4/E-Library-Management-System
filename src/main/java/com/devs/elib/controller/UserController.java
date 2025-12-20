@@ -47,7 +47,7 @@ public class UserController {
             session.setAttribute("role", role);
             
             if (role.equals("admin")) {
-                return "redirect:/dashboard";
+                return "redirect:/";
             } else {
                 return "redirect:/";
             }

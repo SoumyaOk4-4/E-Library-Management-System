@@ -11,6 +11,10 @@ body {
   padding: 0;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f5f5f5;
@@ -30,10 +34,10 @@ header {
 }
 
 .logo-dash-cluster {
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 20px;
 }
 
 .logo {
@@ -53,12 +57,14 @@ header {
   font-size: 25px;
   font-weight: 600;
   color: #fff;
+  transform: translateY(2px);
 }
 
 .dashboard {
-  font-size: 24px;
+  font-size: 25px;
   font-weight: 600;
   color: white;
+  transform: translateY(2px);
 }
 
 .search-bar {
@@ -102,7 +108,7 @@ header {
 .middle {
   display: flex;
   gap: 0;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 80px);
 }
 
 .sidebar {

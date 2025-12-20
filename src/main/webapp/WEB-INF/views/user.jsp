@@ -17,29 +17,17 @@
     <header>
         <div class="logo-dash-cluster">
             <div class="logo">
-                <div class="logo-start">E</div>
-                <div class="logo-end">- Library</div>
+                <div class="logo-start">E -</div>
+                <div class="logo-end"> Library</div>
             </div>
             <div class="dashboard">Users Management</div>
-        </div>
-        <div class="search-bar">
-            <input type="text" placeholder="Search users...">
-        </div>
-        <div class="notif-profile-cluster">
-            <div class="notfication-icon">
-                <i class="fa-solid fa-bell"></i>
-            </div>
-            <div class="profile">
-                <div class="profile-name">Admin</div>
-                <i class="fa-solid fa-circle-user"></i>
-            </div>
         </div>
     </header>
 
     <div class="middle">
         <div class="sidebar">
             <div class="api-call-btn">
-                <a href="${pageContext.request.contextPath}/dashboard">
+                <a href="${pageContext.request.contextPath}/">
                     <i class="fa-solid fa-house"></i>
                     Home
                 </a>
@@ -74,9 +62,6 @@
             <div class="users-container">
                 <div class="users-header">
                     <h2>Users List</h2>
-                    <a href="${pageContext.request.contextPath}/dashboard" class="back-btn">
-                        <i class="fa-solid fa-arrow-left"></i> Back
-                    </a>
                 </div>
 
                 <c:choose>

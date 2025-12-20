@@ -15,8 +15,8 @@
     <header>
         <div class="logo-dash-cluster">
             <div class="logo">
-                <div class="logo-start">E</div>
-                <div class="logo-end">- Library</div>
+                <div class="logo-start">E -</div>
+                <div class="logo-end"> Library</div>
             </div>
             <div class="dashboard">Edit Book</div>
         </div>

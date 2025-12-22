@@ -81,7 +81,6 @@
                                     <td>
                                         <c:choose>
                                             <c:when test="${borrowing.status == 'BORROWED'}">
-                                                <!-- Real-time fine calculation using JavaScript -->
                                                 <span id="fine-${borrowing.id}" class="fine-display">
                                                     Rs. <span id="fine-amount-${borrowing.id}">0</span>
                                                 </span>
@@ -116,13 +115,7 @@
                                             </c:otherwise>
                                         </c:choose>
                                     </td>
-                                    <td>
-                                        <c:if test="${borrowing.status == 'BORROWED' && role == 'admin'}">
-                                            <a href="${pageContext.request.contextPath}/borrowing/return/${borrowing.id}" class="return-btn" onclick="return confirm('Return this book?');">
-                                                Return
-                                            </a>
-                                        </c:if>
-                                    </td>
+
                                 </tr>
                             </c:forEach>
                         </tbody>

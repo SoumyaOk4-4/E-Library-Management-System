@@ -23,6 +23,7 @@
             </div>
             <div class="dashboard">
                 <a href="/">
+                    <i class="fa-solid fa-arrow-left"></i> 
                     Go Back
                 </a>
             </div>

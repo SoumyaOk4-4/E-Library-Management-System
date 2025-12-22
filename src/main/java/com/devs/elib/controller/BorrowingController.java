@@ -43,17 +43,18 @@ public class BorrowingController {
         return "redirect:/login";
     }
 
-    // Return a book
+    // Return a book (admin only)
     @GetMapping("/return/{borrowingId}")
     public String returnBook(@PathVariable int borrowingId, HttpSession session) {
-        String email = (String) session.getAttribute("udata");
-        if (email != null) {
-            Borrowing borrowing = borrowingService.returnBook(borrowingId);
-            if (borrowing != null) {
-                return "redirect:/borrowing/mybookings?success=Book returned successfully!";
-            }
+        String role = (String) session.getAttribute("role");
+        if (role == null || !role.equals("admin")) {
+            return "redirect:/login";
         }
-        return "redirect:/login";
+        Borrowing borrowing = borrowingService.returnBook(borrowingId);
+        if (borrowing != null) {
+            return "redirect:/borrowlist?success=Book returned successfully!";
+        }
+        return "redirect:/borrowlist?error=Unable to return book";
     }
 
     // View user's borrowings (Profile/My Bookings)
@@ -61,6 +62,7 @@ public class BorrowingController {
     public String getMyBookings(HttpSession session, Model model) {
         Integer userId = (Integer) session.getAttribute("userId");
         String email = (String) session.getAttribute("udata");
+        String role = (String) session.getAttribute("role");
         
         if (email == null) {
             return "redirect:/login";
@@ -70,6 +72,7 @@ public class BorrowingController {
             List<Borrowing> borrowings = borrowingService.getUserBorrowings(userId);
             model.addAttribute("borrowings", borrowings);
             model.addAttribute("userEmail", email);
+            model.addAttribute("role", role);
             return "my-bookings";
         }
         return "redirect:/login";

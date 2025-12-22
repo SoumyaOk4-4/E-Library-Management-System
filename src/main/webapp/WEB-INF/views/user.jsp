@@ -53,6 +53,12 @@
                 </a>
             </div>
             <div class="api-call-btn">
+                <a href="${pageContext.request.contextPath}/borrowlist">
+                    <i class="fa-solid fa-list-check"></i>
+                    View Borrowings
+                </a>
+            </div>
+            <div class="api-call-btn">
                 <a href="${pageContext.request.contextPath}/logout">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     Logout

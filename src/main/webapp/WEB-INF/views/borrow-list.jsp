@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Library - My Books</title>
+    <title>E-Library - Borrow List</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/my-bookings.css">
@@ -16,26 +16,21 @@
     <header>
         <div class="logo-dash-cluster">
             <div class="logo">
-                <a href="${pageContext.request.contextPath}/">
+                <a href="${pageContext.request.contextPath}/dashboard">
                     <div class="logo-start">📚 E -</div>
                     <div class="logo-end"> Library</div>
                 </a>
             </div>
-            <div class="dashboard">My Bookings</div>
+            <div class="dashboard">Borrow List (Admin)</div>
         </div>
     </header>
 
     <div class="my-bookings-container">
         <div class="bookings-header">
-            <h2>My Borrowed Books</h2>
+            <h2>All Borrowing Records</h2>
             <a href="${pageContext.request.contextPath}/" class="back-btn">
-                <i class="fa-solid fa-arrow-left"></i> Back to Home
+                <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
             </a>
-        </div>
-
-        <div class="user-info">
-            <p><strong>Email:</strong> ${userEmail}</p>
-            <p><strong>Total Books Borrowed:</strong> ${borrowings.size()}</p>
         </div>
 
         <c:choose>
@@ -44,19 +39,22 @@
                     <table>
                         <thead>
                             <tr>
+                                <th>ID</th>
+                                <th>User Email</th>
                                 <th>Book Name</th>
-                                <th>Author</th>
                                 <th>Borrow Date</th>
                                 <th>Due Date</th>
                                 <th>Status</th>
                                 <th>Fine</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach var="borrowing" items="${borrowings}">
                                 <tr>
+                                    <td>${borrowing.id}</td>
+                                    <td>${borrowing.user.email}</td>
                                     <td>${borrowing.book.name}</td>
-                                    <td>${borrowing.book.author}</td>
                                     <td>${borrowing.borrowDate}</td>
                                     <td>
                                         <c:choose>
@@ -81,46 +79,16 @@
                                     <td>
                                         <c:choose>
                                             <c:when test="${borrowing.status == 'BORROWED'}">
-                                                <!-- Real-time fine calculation using JavaScript -->
-                                                <span id="fine-${borrowing.id}" class="fine-display">
-                                                    Rs. <span id="fine-amount-${borrowing.id}">0</span>
-                                                </span>
-                                                <script>
-                                                    function calculateFine(borrowDateStr, dueDateStr) {
-                                                        const today = new Date();
-                                                        const dueDate = new Date(dueDateStr);
-                                                        if (today <= dueDate) {
-                                                            return 0;
-                                                        }
-                                                        const timeDiff = today - dueDate;
-                                                        const daysOverdue = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-                                                        return daysOverdue * 10; // Rs. 10 per day
-                                                    }
-
-                                                    const borrowDateStr = '${borrowing.borrowDate}';
-                                                    const dueDateStr = '${borrowing.dueDate}';
-                                                    const fineAmount = calculateFine(borrowDateStr, dueDateStr);
-                                                    document.getElementById('fine-amount-${borrowing.id}').innerText = fineAmount;
-                                                </script>
+                                                <c:out value="Rs. ${borrowing.calculateFine()}" />
                                             </c:when>
                                             <c:otherwise>
-                                                <!-- Already returned, show stored fine -->
-                                                <c:choose>
-                                                    <c:when test="${borrowing.fine > 0}">
-                                                        <span class="fine-amount">Rs. ${borrowing.fine}</span>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <span class="no-fine">Rs. 0</span>
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                <c:out value="Rs. ${borrowing.fine}" />
                                             </c:otherwise>
                                         </c:choose>
                                     </td>
                                     <td>
-                                        <c:if test="${borrowing.status == 'BORROWED' && role == 'admin'}">
-                                            <a href="${pageContext.request.contextPath}/borrowing/return/${borrowing.id}" class="return-btn" onclick="return confirm('Return this book?');">
-                                                Return
-                                            </a>
+                                        <c:if test="${borrowing.status == 'BORROWED'}">
+                                            <a href="${pageContext.request.contextPath}/borrowing/return/${borrowing.id}" class="return-btn" onclick="return confirm('Return this book?');">Return</a>
                                         </c:if>
                                     </td>
                                 </tr>
@@ -132,11 +100,8 @@
             <c:otherwise>
                 <div class="no-bookings">
                     <i class="fa-solid fa-book"></i>
-                    <h3>No Books Borrowed</h3>
-                    <p>You haven't borrowed any books yet!</p>
-                    <a href="${pageContext.request.contextPath}/books" style="display: inline-block; margin-top: 20px; padding: 12px 25px; background-color: #4CAF50; color: white; border-radius: 4px; text-decoration: none; font-weight: 600;">
-                        <i class="fa-solid fa-book"></i> Browse Books
-                    </a>
+                    <h3>No Borrowing Records</h3>
+                    <p>There are no borrowing records at the moment.</p>
                 </div>
             </c:otherwise>
         </c:choose>

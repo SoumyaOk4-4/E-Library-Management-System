@@ -147,3 +147,16 @@ Run unit tests with:
 
 Contributions are welcome! Please open issues or PRs. Small things that help: adding tests, improving security, or polishing the UI.
 
+## Demos
+![image](./demo/main.png)
+---
+![image](./demo/books.png)
+---
+![image](./demo/signin.png)
+---
+## Entity Relationship Diagram
+![image](./demo/erd.png)
+---
+## Data Flow Diagram
+![image](./demo/dfd.png)
+---

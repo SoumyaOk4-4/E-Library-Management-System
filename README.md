@@ -147,17 +147,3 @@ Run unit tests with:
 
 Contributions are welcome! Please open issues or PRs. Small things that help: adding tests, improving security, or polishing the UI.
 
----
-
-## 📝 License
-
-Add a LICENSE file to state the project's license (MIT is a simple permissive choice).
-
----
-
-If you'd like, I can also:
-- add a LICENSE file (e.g. MIT) ✅
-- add a basic `Dockerfile` and `docker-compose.yml` for quick local setup ✅
-- add an extra `CONTRIBUTING.md` and issue templates ✅
-
-Would you like me to add any of those now? ✨
